@@ -22,6 +22,9 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include('femmesuccour.urls')),
     path('accounts/', include('accounts.urls')),
+    path('misogyny/', include('misogynyDetector.urls')),
+    path('leave/', include('leaveCalculator.urls')),
+    
 ]
 
 urlpatterns = urlpatterns + \

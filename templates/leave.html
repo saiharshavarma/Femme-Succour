@@ -1,0 +1,33 @@
+{% extends "base.html" %}
+{% load static %}
+{% block content %}
+
+<link rel="stylesheet" type="text/css" href="{% static 'css/register.css' %}">
+
+<div class="customer">
+    <div class="container fluid">
+        <div class=row>
+            <div class="col-md-6 col-sm-12 justify-content-end">
+                <form id="contactForm" method='post' enctype="multipart/form-data">
+
+                    {% csrf_token %}
+
+                    <fieldset>
+                        <div class="mb-3">
+                            <label for="pdf" class="form-label">Upload the Report</label>
+                            <input type="file" name="pdf" class="form-control" required autofocus>
+                        </div>
+                        <button type="submit" class="btn btn-secondary">Upload</button>
+                    </fieldset>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+<div>
+    {% for message in messages %}
+    <h3>{{message}}</h3>
+    {% endfor %}
+</div>
+<script src="{% static 'js/register.js' %}"></script>
+{% endblock content %}

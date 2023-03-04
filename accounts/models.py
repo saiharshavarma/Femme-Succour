@@ -9,4 +9,4 @@ class Profile(models.Model):
     is_HR = models.BooleanField()
 
     def __str__(self):
-        return str(f'{self.user.id}' + ' ' + f'{self.user.username}' + ' ' + f'{self.is_HR}')
+        return str(f'{self.user.username}')
