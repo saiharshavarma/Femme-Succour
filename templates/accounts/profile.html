@@ -1,9 +1,48 @@
 {% extends "base.html" %}
+{% load static %}
 {% block content %}
 
-    <h1>Hello, {{ user.first_name }}</h1> 
-    Email: {{ user.email }} <br>
-    Username: {{ user.username }} <br>
-    Name: {{ user.first_name }} {{ user.last_name }}
+<link rel="stylesheet" href="{% static 'css/main.css' %}">
+
+<style>
+    body {
+        background: url("https://static.vecteezy.com/system/resources/thumbnails/007/940/474/small/gradient-fluid-background-with-purple-blue-orange-color-smooth-gradient-illustration-suitable-for-background-web-design-banner-illustration-and-others-vector.jpg");
+        background-size: cover;
+        padding: 0;
+        backdrop-filter: brightness(50%);
+    }
+</style>
+
+<section class="vh-100" style="background-image: linear-gradient(45deg,  0 50%, black 50% 100%);">
+    <div class="container py-5 h-100">
+        <div class="row d-flex justify-content-center align-items-center h-100">
+            <div class="col col-lg-6 mb-4 mb-lg-0">
+                <div class="card mb-3" style="border-radius: .5rem;">
+                    <div class="row g-0">
+                        <div class="col-md-4 gradient-custom text-center text-white"
+                            style="border-top-left-radius: .5rem; border-bottom-left-radius: .5rem;background-image: linear-gradient(to right, #c6ffdd, #fbd786, #f7797d);">
+                            <img src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-chat/ava1-bg.webp"
+                                alt="Avatar" class="img-fluid my-5" style="width: 80px;" />
+                            <h5>{{ name }}</h5>
+                            <i class="far fa-edit mb-5"></i>
+                        </div>
+                        <div class="col-md-8">
+                            <div class="card-body p-4">
+                                <h6>Information</h6>
+                                <hr class="mt-0 mb-4">
+                                <div class="row pt-1">
+                                    <div class="col-6 mb-3">
+                                        <h6>Email</h6>
+                                        <p class="text-muted">{{ email }}</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
 
 {% endblock content %}

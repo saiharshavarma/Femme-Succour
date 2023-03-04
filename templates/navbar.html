@@ -1,0 +1,27 @@
+<nav class="navbar navbar-expand-lg navbar-light fixed-top py-3" id="mainNav">
+    <div class="container px-4 px-lg-5">
+        <a class="navbar-brand" href="{% url 'home' %}"><b><span style="color:#39FF14">FEMME -</span>
+
+                <span style="color: grey">Succour</span></b></a>
+        <button class="navbar-toggler navbar-toggler-right" type="button" data-bs-toggle="collapse"
+            data-bs-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false"
+            aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
+        <div class="collapse navbar-collapse" id="navbarResponsive">
+            <ul class="navbar-nav ms-auto my-2 my-lg-0">
+                {% if user.is_authenticated %}
+                <li class="nav-item"><a class="nav-link" href="{% url 'profile' %}">{{ user }}</a></li>
+                {% else %}
+                <li class="nav-item"><a class="nav-link" href="{% url 'login' %}">Login</a></li>
+                {% endif %}
+
+                <li class="nav-item"><a class="nav-link" href="index.html">About</a></li>
+                <li class="nav-item"><a class="nav-link" href="{% url 'uploadVideo' %}">Misogyny Detector</a></li>
+                <li class="nav-item"><a class="nav-link" href="{% url 'uploadPDF' %}">Leave Evaluator</a></li>
+                {% if user.is_authenticated %}
+                <li class="nav-item"><a class="nav-link" href="{% url 'logout' %}">Logout</a></li>
+                {% endif %}
+
+            </ul>
+        </div>
+    </div>
+</nav>

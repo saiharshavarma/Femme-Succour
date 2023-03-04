@@ -60,5 +60,8 @@ def logout(request):
 
 
 def profile(request):
-    context = {'user': request.user}
+    user = request.user
+    name = user.first_name + ' ' + user.last_name
+    email = user.email
+    context = {'name': name, 'email': email}
     return render(request, 'accounts/profile.html', context)

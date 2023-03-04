@@ -5,7 +5,10 @@ import speech_recognition as sr
 import moviepy.editor as mp
 from pydub import AudioSegment
 from pydub.silence import split_on_silence
+from sklearn.feature_extraction.text import TfidfVectorizer
 import os
+import pickle
+import numpy
 
 r = sr.Recognizer()
 
@@ -65,3 +68,12 @@ def get_large_audio_transcription():
                 whole_text += text
     print("Whole text:", whole_text)
     return whole_text
+
+def miogyny(request):
+    pickled_model = pickle.load(open('misogynyDetector/detector.pkl', 'rb'))
+    transcript = "You are shit. Get lost from here"
+    vectorizer = TfidfVectorizer()
+    new_vector = vectorizer.transform([transcript])
+    toxicity = pickled_model.predict(new_vector)
+    print(toxicity)
+    return render("home")

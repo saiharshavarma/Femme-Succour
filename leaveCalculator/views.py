@@ -45,20 +45,20 @@ def uploadPDF(request):
             os.remove('media/report.pdf')
         except:
             pass
-        record = Leave.objects.create(profile=profile, report=report)
-        record.save()
+        leave = Leave.objects.create(profile=profile, report=report)
+        leave.save()
         os.rename(('media/'+report.name).replace(" ", "_"), 'media/report.pdf')
-        readPDF(request)
+        readPDF(request, leave)
     return render(request, "leave.html")
 
-def readPDF(request):
+def readPDF(request, leave):
     reader = PdfReader('media/report.pdf')
     text = ""
     for pageNo in range(len(reader.pages)):
         page = reader.pages[pageNo]
         text += page.extract_text()
     extractData(request, text)
-    predictMaternalRisk()
+    predictMaternalRisk(leave)
     return render(request, "leave.html")
 
 def extractData(request, text):
@@ -106,7 +106,7 @@ def removespecialCharacters(request, text):
     text = re.sub(pattern, '', text)
     return text
 
-def predictMaternalRisk():
+def predictMaternalRisk(leave):
     pickled_model = pickle.load(open('leaveCalculator/classifier.pkl', 'rb'))
     ch = 0
     fh = 0
@@ -141,9 +141,10 @@ def predictMaternalRisk():
     bodyTemp = float(parameters["temperature"])
     list = pickled_model.predict([[age, bmi, systolicBP, diastolicBP, bloodGlucose, bodyTemp, ch, fh, pa, pl, mg]])
     if list[0] == 0:
-        print("Low Risk!")
+        leave.maternity_leave += 1
     elif list[0] == 1:
-        print("Mid Risk!")
+        leave.maternity_leave += 2
     else:
-        print("High Risk!")
+        leave.maternity_leave += 3
+    leave.save()
     return None

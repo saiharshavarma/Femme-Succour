@@ -2,43 +2,68 @@
 {% load static %}
 {% block content %}
 
-<link rel="stylesheet" type="text/css" href="{% static 'css/register.css' %}">
+<link rel="stylesheet" type="text/css" href="{% static 'css/login.css' %}">
 
-<div class="customer">
-    <div class="container fluid">
-        <div class=row>
-            <div class="col-md-6 col-sm-12">
-                <img id="aloe" src="https://i.pinimg.com/originals/cd/93/c6/cd93c6d9c31dd895a4634650e1331b72.png" />
+<section class="ftco-section">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-md-2 text-center mb-5">
+
             </div>
-            <div class="col-md-6 col-sm-12 justify-content-end">
-                <form id="contactForm" method='post'>
-
-                    {% csrf_token %}
-
-                    <h3>Login Here!</h3>
-                    <fieldset>
-                        <div class="mb-3">
-                            <label for="email" class="form-label">Username</label>
-                            <input type="text" name="username" class="form-control" placeholder="Username" required
-                                autofocus>
+        </div>
+        <div class="row justify-content-center">
+            <div class="col-md-0 col-lg-10 mt-0">
+                <div class="wrap d-md-flex">
+                    <div class="img"
+                        style="background-image: url(https://cdn.dribbble.com/users/154194/screenshots/10824002/media/ec9ec9fb933aee1c82b36ba14a3c4f9a.jpg?compress=1&resize=400x300);">
+                    </div>
+                    <div class="login-wrap p-2 p-md-5">
+                        <div class="d-flex">
+                            <div class="w-100">
+                                <h3 class="mb-4">Sign In</h3>
+                            </div>
+                            <div class="w-100">
+                                <p class="social-media d-flex justify-content-end">
+                                    <a href="#"
+                                        class="social-icon d-flex align-items-center justify-content-center"><span
+                                            class="fa fa-facebook"></span></a>
+                                    <a href="#"
+                                        class="social-icon d-flex align-items-center justify-content-center"><span
+                                            class="fa fa-twitter"></span></a>
+                                </p>
+                            </div>
                         </div>
-                        <div class="mb-3">
-                            <label for="password" class="form-label">Password</label>
-                            <input type="password" name="password" class="form-control" placeholder="Password" required
-                                autofocus>
-                        </div>
-                        <a class="registerbtn" href="{% url 'register' %}">Not Registered yet?</a><br>
-                        <button type="submit" class="btn btn-secondary">Login</button>
-                    </fieldset>
-                </form>
+                        <form class="signin-form" method="POST">
+                            {% csrf_token %}
+                            <div class="form-group mb-3">
+                                <label class="label" for="name">Username</label>
+                                <input type="text" class="form-control" name="username" placeholder="Username" required>
+                            </div>
+                            <div class="form-group mb-3">
+                                <label class="label" for="password">Password</label>
+                                <input type="password" class="form-control" name="password" placeholder="Password"
+                                    required>
+                            </div>
+                            <div class="form-group">
+                                <button type="submit" class="form-control btn btn-primary rounded submit px-3">Sign
+                                    In</button>
+                            </div>
+                        </form>
+                        <p class="text-center">Not a member? <a data-toggle="tab" href="{% url 'register' %}">Sign
+                                Up</a></p>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
-</div>
+</section>
 <div>
     {% for message in messages %}
     <h3>{{message}}</h3>
     {% endfor %}
 </div>
-<script src="{% static 'js/register.js' %}"></script>
+<script src="js/jquery.min.js"></script>
+<script src="js/popper.js"></script>
+<script src="js/bootstrap.min.js"></script>
+<script src="js/main.js"></script>
 {% endblock content %}
