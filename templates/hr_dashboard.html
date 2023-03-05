@@ -1,0 +1,63 @@
+{% extends "base.html" %}
+{% load static %}
+{% block content %}
+
+<link rel="stylesheet" href="{% static 'css/hr_dash.css' %}">
+<link rel="stylesheet" href="{% static 'css/main.css' %}">
+
+<div class="container" id="dummy">
+    <div class="row">
+        <div class="col-sm-12 col-lg-12 col-md-12">
+            <a class="ahead" href="#dummyhead">
+                <h1 id="dummyhead" class="heading"
+                    style="text-align: center; font-family: 'Montserrat', sans-serif; color: white; font-weight: bold; padding: 6%;">
+                    Maternity Leave Applicants</h1>
+            </a>
+        </div>
+    </div>
+</div>
+
+<div class="container">
+    <div data-aos="fade-up-right">
+        <div class="row" style="text-align: center;">
+            {% for leave in leaves %}
+            <div class="ppimg col-sm-12 col-lg-3 col-md-6">
+                <a class="imglink">
+                    <img class="pimg"
+                        src="data:image/jpeg;base64,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"
+                        alt="1">
+                </a>
+                <a class="imgp" href="task1.html" style="padding: 4%; display: block;">{{ leave.profile }}</a>
+                <p style="font-size: 1.1rem; color: rgb(160, 158, 158);">{{ leave.pregnancy_date }}</p>
+                <a href="{% url 'leaveprofile' the_slug=leave.slug %}"">
+                    <button type=" button" class="btn btn-outline-warning" style="line-height: 1.4;">Open</button>
+                </a>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</div>
+</div>
+
+<script>
+    AOS.init({
+        duration: 1500,
+    })
+</script>
+<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+    integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+    crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+    integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+    crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+    integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+    crossorigin="anonymous"></script>
+
+<div>
+    {% for message in messages %}
+    <h3>{{message}}</h3>
+    {% endfor %}
+</div>
+<script src="{% static 'js/register.js' %}"></script>
+{% endblock content %}

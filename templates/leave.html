@@ -306,10 +306,16 @@
 
             <div style="width:100%;margin-left:-20px;">
                 <br><br>
-
-                <input type="button" value="Leave Pending For Now" onclick="readFile()">
+                {% if status is None %}
+                <br>
+                {% elif status == 0 %}
+                Leave status : Pending
+                {% else %}
+                Leave status : Approved
+                {% endif %}
             </div>
         </div>
+        <input type="date" name="pregnant">
         <input type="submit">
     </form>
 </div>

@@ -13,10 +13,13 @@
                 {% else %}
                 <li class="nav-item"><a class="nav-link" href="{% url 'login' %}">Login</a></li>
                 {% endif %}
-
-                <li class="nav-item"><a class="nav-link" href="index.html">About</a></li>
+                {% if user.profile.is_HR %}
+                <li class="nav-item"><a class="nav-link" href="{% url 'uploadVideo' %}">Meeting Dashboard</a></li>
+                <li class="nav-item"><a class="nav-link" href="{% url 'leavedash' %}">Leave Dashboard</a></li>
+                {% else %}
                 <li class="nav-item"><a class="nav-link" href="{% url 'uploadVideo' %}">Misogyny Detector</a></li>
                 <li class="nav-item"><a class="nav-link" href="{% url 'uploadPDF' %}">Leave Evaluator</a></li>
+                {% endif %}
                 {% if user.is_authenticated %}
                 <li class="nav-item"><a class="nav-link" href="{% url 'logout' %}">Logout</a></li>
                 {% endif %}

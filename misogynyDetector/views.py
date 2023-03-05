@@ -80,7 +80,7 @@ def miogyny(request, record):
     # new_vector = vectorizer.transform([transcript])
     # toxicity = pickled_model.predict(new_vector)[0]
     print(toxicity)
-    return render("home")
+    return render(request, "home.html")
 
 def readPDF(request, record):
     reader = PdfReader('media/recording.pdf')
@@ -88,5 +88,6 @@ def readPDF(request, record):
     for pageNo in range(len(reader.pages)):
         page = reader.pages[pageNo]
         text += page.extract_text()
-    miogyny(request, record)
+    print(text)
+    miogyny(request, text)
     return render(request, "leave.html")

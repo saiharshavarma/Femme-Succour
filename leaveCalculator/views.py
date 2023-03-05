@@ -41,15 +41,22 @@ def uploadPDF(request):
     if request.method == "POST":
         profile = Profile.objects.get(user=request.user.id)
         report = request.FILES['pdf']
+        date = request.POST['pregnant']
         try:
             os.remove('media/report.pdf')
         except:
             pass
-        leave = Leave.objects.create(profile=profile, report=report)
+        leave = Leave.objects.create(profile=profile, report=report, pregnancy_date=date)
         leave.save()
         os.rename(('media/'+report.name).replace(" ", "_"), 'media/report.pdf')
         readPDF(request, leave)
-    return render(request, "leave.html")
+    try:
+        user_leave = Leave.objects.get(profile=(Profile.objects.get(user=request.user)))
+        status = user_leave.leave_approved
+    except:
+        status = None
+    context = {"status": status}
+    return render(request, "leave.html", context)
 
 def readPDF(request, leave):
     reader = PdfReader('media/report.pdf')
@@ -59,7 +66,7 @@ def readPDF(request, leave):
         text += page.extract_text()
     extractData(request, text)
     predictMaternalRisk(leave)
-    return render(request, "leave.html")
+    return None
 
 def extractData(request, text):
     text = text.split('\n')
@@ -69,7 +76,6 @@ def extractData(request, text):
     for line in text:
         for parameter in parameters.keys():
             if "Years" in line[1]:
-                print(line[1])
                 parameters["age"] = line[1].replace("Years", '') 
             fuzzy_index = fuzz.token_sort_ratio(line[0].lower().replace(' ', ''), parameter.lower())
             if fuzzy_index > 90:
@@ -148,3 +154,19 @@ def predictMaternalRisk(leave):
         leave.maternity_leave += 3
     leave.save()
     return None
+
+def leavedash(request):
+    leaves = list(Leave.objects.filter(leave_approved = False))
+    context = {'leaves': leaves}
+    return render(request, "hr_dashboard.html", context)
+
+def leaveprofile(request, the_slug):
+    leave = Leave.objects.get(slug=the_slug)
+    if request.method=="POST":
+        approval = request.POST['approval']
+        if approval == "Accept":
+            leave.leave_approved = True
+            leave.save()
+            print(leave.leave_approved)
+    context = {"leave": leave}
+    return render(request, "leaveprofile.html", context)

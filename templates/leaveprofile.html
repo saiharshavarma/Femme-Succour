@@ -1,0 +1,103 @@
+{% extends "base.html" %}
+{% load static %}
+{% block content %}
+
+<link rel="stylesheet" href="{% static 'css/hr_dash.css' %}">
+<link rel="stylesheet" href="{% static 'css/main.css' %}">
+<style>
+  body {
+    background: url("https://static.vecteezy.com/system/resources/thumbnails/007/940/474/small/gradient-fluid-background-with-purple-blue-orange-color-smooth-gradient-illustration-suitable-for-background-web-design-banner-illustration-and-others-vector.jpg");
+    background-size: cover;
+    padding: 0;
+    backdrop-filter: brightness(50%);
+  }
+
+  a {
+    text-decoration: none;
+  }
+
+  .accept {
+    color: #FFF;
+    background: #44CC44;
+    padding: 10px 10px;
+    box-shadow: 0 4px 0 0 #2EA62E;
+  }
+
+  .accept:hover {
+    background: #6FE76F;
+    box-shadow: 0 4px 0 0 #7ED37E;
+  }
+
+  .deny {
+    color: #FFF;
+    background: tomato;
+    padding: 10px 10px;
+    box-shadow: 0 4px 0 0 #CB4949;
+  }
+
+  .deny:hover {
+    background: rgb(255, 147, 128);
+    box-shadow: 0 4px 0 0 #EF8282;
+  }
+</style>
+<section class="vh-100" style="background-image: linear-gradient(45deg,  0 50%, black 50% 100%);">
+  <div class="container py-5 h-100">
+    <div class="row d-flex justify-content-center align-items-center h-100">
+      <div class="col col-lg-6 mb-4 mb-lg-0">
+        <div class="card mb-3" style="border-radius: .5rem;">
+          <div class="row g-0">
+            <div class="col-md-4 gradient-custom text-center text-white"
+              style="border-top-left-radius: .5rem; border-bottom-left-radius: .5rem;background-image: linear-gradient(to right, #c6ffdd, #fbd786, #f7797d);">
+              <img src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-chat/ava1-bg.webp" alt="Avatar"
+                class="img-fluid my-5" style="width: 80px;" />
+              <h5>{{ leave.profile }}</h5>
+              <i class="far fa-edit mb-5"></i>
+            </div>
+            <div class="col-md-8">
+              <div class="card-body p-4">
+                <h6>Information</h6>
+                <hr class="mt-0 mb-4">
+                <div class="row pt-1">
+                  <div class="col-6 mb-3">
+                    <h6>Email</h6>
+                    <p class="text-muted">{{ leave.profile.user.email }}</p>
+                  </div>
+                </div>
+                <h6>Maternity Leave Information</h6>
+                <hr class="mt-0 mb-4">
+                <div class="row pt-1">
+                  <div class="col-6 mb-3">
+                    <h6>Duration</h6>
+                    <p class="text-muted">{{ leave.maternity_leave }}</p>
+                  </div>
+                  <div class="col-6 mb-3">
+                    <h6>Start Date</h6>
+                    <p class="text-muted">{{ leave.pregnancy_date }}</p>
+                  </div>
+                </div>
+                <center>
+                  <br>
+                  <form method="POST">
+                    {% csrf_token %}
+                    Leave status:
+                    <input type="radio" name="approval" style="margin-right: 3%; " value="Accept">Accept
+                    <input type="radio" name="approval" style="margin-right: 3%; " value="Deny">Deny<br>
+                    <input type="submit" value="Confirm">
+                  </form>
+                </center>
+                <div class="d-flex justify-content-start">
+                  <a href="#!"><i class="fab fa-facebook-f fa-lg me-3"></i></a>
+                  <a href="#!"><i class="fab fa-twitter fa-lg me-3"></i></a>
+                  <a href="#!"><i class="fab fa-instagram fa-lg"></i></a>
+                </div>
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</section>
+{% endblock content %}
