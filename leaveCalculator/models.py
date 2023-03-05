@@ -7,3 +7,4 @@ class Leave(models.Model):
     profile = models.ForeignKey(Profile, on_delete=models.CASCADE)
     report = models.FileField()
     maternity_leave = models.IntegerField(default=9)
+    pregnancy_date = models.DateField()

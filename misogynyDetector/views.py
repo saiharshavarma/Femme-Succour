@@ -6,9 +6,12 @@ import moviepy.editor as mp
 from pydub import AudioSegment
 from pydub.silence import split_on_silence
 from sklearn.feature_extraction.text import TfidfVectorizer
+from PyPDF2 import PdfReader
+from misogynyDetector import predict
 import os
 import pickle
 import numpy
+import nltk
 
 r = sr.Recognizer()
 
@@ -18,13 +21,13 @@ def uploadVideo(request):
         profile = Profile.objects.get(user=request.user.id)
         recording = request.FILES['recording']
         try:
-            os.remove('media/recording.mp4')
+            os.remove('media/recording.pdf')
         except:
             pass
         record = MeetingRecording.objects.create(profile=profile, recording=recording, transcript="")
         record.save()
-        os.rename(('media/'+recording.name).replace(" ", "_"), 'media/recording.mp4')
-        getTranscript(record)
+        os.rename(('media/'+recording.name).replace(" ", "_"), 'media/recording.pdf')
+        readPDF(request, record)
     return render(request, "misogyny.html")
 
 def getTranscript(record):
@@ -39,11 +42,11 @@ def getTranscript(record):
     # print(transcript)
     record.transcript = transcript
     record.save()
-    return 
+    return
 
 def get_large_audio_transcription():
     path = "transcript.wav"
-    sound = AudioSegment.from_wav(path)  
+    sound = AudioSegment.from_wav(path)
     chunks = split_on_silence(sound,
         min_silence_len = 500,
         silence_thresh = sound.dBFS-14,
@@ -69,11 +72,21 @@ def get_large_audio_transcription():
     print("Whole text:", whole_text)
     return whole_text
 
-def miogyny(request):
+def miogyny(request, record):
     pickled_model = pickle.load(open('misogynyDetector/detector.pkl', 'rb'))
-    transcript = "You are shit. Get lost from here"
-    vectorizer = TfidfVectorizer()
-    new_vector = vectorizer.transform([transcript])
-    toxicity = pickled_model.predict(new_vector)
+    transcript = record
+    toxicity = predict.xyz(record)
+    # vectorizer = TfidfVectorizer()
+    # new_vector = vectorizer.transform([transcript])
+    # toxicity = pickled_model.predict(new_vector)[0]
     print(toxicity)
     return render("home")
+
+def readPDF(request, record):
+    reader = PdfReader('media/recording.pdf')
+    text = ""
+    for pageNo in range(len(reader.pages)):
+        page = reader.pages[pageNo]
+        text += page.extract_text()
+    miogyny(request, record)
+    return render(request, "leave.html")
