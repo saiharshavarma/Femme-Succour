@@ -69,6 +69,7 @@ def get_large_audio_transcription():
                 text = f"{text.capitalize()}. "
                 print(chunk_filename, ":", text)
                 whole_text += text
+    
     print("Whole text:", whole_text)
     return whole_text
 
@@ -88,6 +89,7 @@ def readPDF(request, record):
     for pageNo in range(len(reader.pages)):
         page = reader.pages[pageNo]
         text += page.extract_text()
+    text = text.replace("s***", "shit")
     print(text)
     miogyny(request, text)
     return render(request, "leave.html")

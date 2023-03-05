@@ -23,7 +23,7 @@
     }
 
     body {
-        background: url("https://static.vecteezy.com/system/resources/thumbnails/007/940/474/small/gradient-fluid-background-with-purple-blue-orange-color-smooth-gradient-illustration-suitable-for-background-web-design-banner-illustration-and-others-vector.jpg");
+        background: url("{% static 'images/2.png' %}");
         background-size: cover;
         padding: 0;
         backdrop-filter: brightness(50%);
@@ -35,6 +35,8 @@
         justify-content: center;
         flex-flow: column;
         color: white;
+        overflow-x: hidden;
+        overflow-y: hidden;
     }
 
     .file-container {
@@ -58,9 +60,6 @@
 
     .file-container .file-wrapper {
         width: 30vw;
-        height: 80vh;
-        max-height: 500px;
-        min-height: 400px;
         min-width: 400px;
         top: 0;
         right: 0;
@@ -284,6 +283,19 @@
         font-family: "Rubik", sans-serif;
         color: grey;
     }
+
+    .button {
+        width: 100%;
+        padding: 8px 12px;
+        border: 0;
+        color: white;
+        border-radius: 7px;
+        background: #9a94ef;
+        font-size: 12px;
+        margin: 10px;
+        text-align: center;
+        text-decoration: none;
+    }
 </style>
 
 <div class="file-container">
@@ -302,14 +314,11 @@
                     </p>
                 </div>
             </div>
-
-            <div style="width:100%;margin-left:-20px;">
-                <br><br>
-
-                <input type="button" value="Leave Pending For Now" onclick="readFile()">
-            </div>
         </div>
-        <input type="submit">
+        <div style="display: flex; align-items: center; justify-content: center">
+            <a class="button" target="_blank" href="https://meet.google.com/">Join the meet</a>
+            <input class="button" type="submit">
+        </div>
     </form>
 </div>
 <div>

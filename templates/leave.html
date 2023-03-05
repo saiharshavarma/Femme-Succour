@@ -23,7 +23,7 @@
     }
 
     body {
-        background: url("https://static.vecteezy.com/system/resources/thumbnails/007/940/474/small/gradient-fluid-background-with-purple-blue-orange-color-smooth-gradient-illustration-suitable-for-background-web-design-banner-illustration-and-others-vector.jpg");
+        background: url("{% static 'images/2.png' %}");
         background-size: cover;
         padding: 0;
         backdrop-filter: brightness(50%);
@@ -304,7 +304,7 @@
                 </div>
             </div>
 
-            <div style="width:100%;margin-left:-20px;">
+            <div style="width:100%;margin-left:-20px; color: white">
                 <br><br>
                 {% if status is None %}
                 <br>

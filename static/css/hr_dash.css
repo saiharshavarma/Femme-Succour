@@ -2,7 +2,7 @@ body {
     margin: 0;
     padding: 0;
 
-    background: url("https://static.vecteezy.com/system/resources/thumbnails/007/940/474/small/gradient-fluid-background-with-purple-blue-orange-color-smooth-gradient-illustration-suitable-for-background-web-design-banner-illustration-and-others-vector.jpg");
+    background: url("../images/1.png");
     background-size: cover;
     position: relative;
     padding: 0;
@@ -91,9 +91,6 @@ border-radius: 10px;
 background: rgb(49, 49, 49);
 border-radius: 10px;
 } */
-.custom-toggler .navbar-toggler-icon {
-    background-image: url("data:image/svg+xml;charset=utf8,%3Csvg viewBox='0 0 32 32' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath stroke='rgba(255,255,255, 0.5)' stroke-width='2' stroke-linecap='round' stroke-miterlimit='10' d='M4 8h24M4 16h24M4 24h24'/%3E%3C/svg%3E");
-}
 
 @media (min-width: 0px) and (max-width: 957px) {
     .pimg {
